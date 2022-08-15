@@ -1,0 +1,23 @@
+from snakemake.io import load_configfile
+
+# setup workflow
+def load_config(path):
+    config = load_configfile(path)
+    return config
+
+
+module parental_stock:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_parental_stock/config.yaml")
+    
+use rule * from parental_stock as parental_stock_*
+
+
+# define required output files
+rule all:
+    input:
+        parental_stock.rules.vpipe_all.input,
+        parental_stock.config['post-processing']['output']['datadir']+'/coverage_diagnostics_', # f"",
+    default_target: True

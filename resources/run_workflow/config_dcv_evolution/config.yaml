@@ -1,0 +1,30 @@
+vpipe:
+  general:
+      aligner: "bwa"
+
+  input:
+      reference: /Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/resources/reference/ancestor_consensus.fasta
+      datadir: /Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/resources/samples/Experiment3
+      read_length: 250
+      samples_file: samples.tsv
+      paired: true
+
+  snv:
+    consensus: false
+
+  output:
+      datadir: /Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/results_vpipe/Experiment3
+
+      snv: true
+      local: true
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+post-processing:
+  input:
+    datadir: /Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/results_vpipe/Experiment3
+
+  output:
+    datadir: /Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/Experiment3

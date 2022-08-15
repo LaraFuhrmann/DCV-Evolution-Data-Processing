@@ -1,0 +1,98 @@
+from snakemake.utils import min_version
+min_version("6.0")
+
+configfile: "config/config.yaml"
+
+module vpipe:
+    snakefile: "../resources/V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
+    config: config["vpipe"] #"config/config_vpipe.yaml"
+
+use rule * from vpipe as vpipe_*
+
+rule all:
+    input:
+        rules.vpipe_all.input,
+        config['post-processing']['output']['datadir']+'/coverage_diagnostics_',
+        os.path.join(config["post-processing"]["output"]["datadir"], "aggregated_diversity.csv"),
+        os.path.join(config["post-processing"]["output"]["datadir"], "deletion_analysis.csv"),
+    default_target: True
+
+
+rule coverage_diagnostics:
+    input:
+        fnames=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
+    output:
+        out_dir=config['post-processing']['output']['datadir']+'/coverage_diagnostics_'
+    resources:
+        mem_mb=6024,
+        time_min=840,
+    conda:
+        "envs/diversity_measures.yaml"
+    script:
+        "./scripts/coverage_diagnostics.py"
+
+
+rule compute_diversity_measures:
+    input:
+        fnames_samples_snvs_vcf="{dataset}/variants/SNVs/snvs.vcf",
+        fname_ref=config['vpipe']['input']['reference'],
+    output:
+        diversity_csv="{dataset}/variants/SNVs/diversity_measures.csv",
+        shannon_csv="{dataset}/variants/SNVs/position_shannon_entropy.csv",
+    conda:
+        "envs/diversity_measures.yaml"
+    script:
+        "./scripts/compute_diversity_measures.py"
+
+rule aggregate_diversity:
+    input:
+        fnames_diversity=expand(
+            "{dataset}/variants/SNVs/diversity_measures.csv", dataset=vpipe.datasets
+        ),
+        fnames_shannon=expand(
+            "{dataset}/variants/SNVs/position_shannon_entropy.csv", dataset=vpipe.datasets
+        ),
+    output:
+        diversity_csv=os.path.join(config["post-processing"]["output"]["datadir"], "aggregated_diversity.csv"),
+        shannon_csv=os.path.join(config["post-processing"]["output"]["datadir"], "aggregated_entropy.csv"),
+    conda:
+        "envs/diversity_measures.yaml"
+    script:
+        "./scripts/aggregate_diversity.py"
+
+
+rule deletion_analysis:
+    input:
+        fname_snv_csv="{dataset}/variants/SNVs/snvs.csv",
+    output:
+        fname_out="{dataset}/variants/SNVs/called_deletions.csv",
+    conda:
+        "envs/diversity_measures.yaml"
+    script:
+        "./scripts/deletion_analysis.py"
+
+rule aggregate_deletion_analysis:
+    input:
+        fnames_deletions=expand(
+            "{dataset}/variants/SNVs/called_deletions.csv", dataset=vpipe.datasets
+        ),
+    output:
+        fname_deletion_analysis_csv=os.path.join(config["post-processing"]["output"]["datadir"], "deletion_analysis.csv"),
+    run:
+        import pandas as pd
+        merged_deletions_csv = pd.concat(
+            [pd.read_csv(path_del) for path_del in input.fnames_deletions]
+        )
+        merged_deletions_csv.to_csv(output.fname_deletion_analysis_csv)
+
+
+rule aggregate_co_occurring_mutations:
+    input:
+        dnames_shorah=expand(str(rules.vpipe_snv.output.VCF).split('snvs.vcf')[0]+"REGION_1/", dataset=vpipe.datasets),
+        fname_reference=config['vpipe']['input']['reference'],
+    output:
+        fname_cooccurring_mutations=os.path.join(config["post-processing"]["output"]["datadir"],"/cooccurring_mutations.csv"),
+    conda:
+        "envs/co-occurring_mutations.yaml"
+    script:
+        "./scripts/aggregate_cooccurring_mutations.py"

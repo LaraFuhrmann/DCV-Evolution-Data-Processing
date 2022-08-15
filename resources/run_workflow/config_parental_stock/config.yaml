@@ -1,0 +1,31 @@
+vpipe:
+  general:
+      aligner: "bwa"
+      snv_caller: "lofreq"
+
+  input:
+      reference: ../references/DCV_EBref.fasta
+      datadir: ../samples/parental_stock
+      read_length: 100
+      samples_file: samples_parental_stock.tsv
+      paired: true
+
+  snv:
+    consensus: false
+
+  output:
+      datadir: results/parental_stock/results_vpipe
+
+      snv: true
+      local: true
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+post-processing:
+  input:
+    datadir: results/parental_stock/results_vpipe
+
+  output:
+    datadir: results/parental_stock
