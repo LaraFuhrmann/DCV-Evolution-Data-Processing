@@ -65,7 +65,7 @@ def main(file_list, out_dir):
         passages = sorted(df_pos['passage'].unique())
 
         fig, ax = plt.subplots(3,11, figsize=(20, 5),constrained_layout=True, sharey=True,  sharex=True)
-        fig.suptitle('Coverage of MT2_2 cell line', fontsize=20)
+        #fig.suptitle('Coverage of MT2_2 cell line', fontsize=20)
 
         df_cov_compact_grouped_null = df_pos.groupby(['cell_line', 'passage'], axis=0, dropna=False).mean()
         x_pos = sorted(df_cov_compact_grouped_null['pos'].unique())
