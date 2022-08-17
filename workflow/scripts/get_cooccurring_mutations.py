@@ -136,7 +136,7 @@ def parseWindow(shorah_directory, line, ref1, threshold=0.9):
 
 def main(fname_reference, shorah_directory):
     """
-    shorah_directory: /cluster/work/bewi/members/lfuhrmann/HIV-LTE/HIV-LTE-NGS-data-Experiment3/samples/MT2_2/VP10/variants/SNVs/REGION_1
+    shorah_directory: samples/cell_line/passage/variants/SNVs/REGION_1
     """
 
     ref = dict([[s.id, str(s.seq).upper()] for s in SeqIO.parse(fname_reference, 'fasta')])
