@@ -22,7 +22,7 @@ vpipe:
       snv: true
       local: true
       global: false
-      visualization: false
+      visualization: true
       diversity: false
       QA: false
 
