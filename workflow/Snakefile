@@ -12,11 +12,11 @@ use rule * from vpipe as vpipe_*
 rule all:
     input:
         rules.vpipe_all.input,
-        f"results/coverage_diagnostics_",
-        f"results/aggregated_diversity.csv",
-        f"results/aggregated_entropy.csv",
-        f"results/cooccurring_mutations.csv",
-        f"results/all_mutations.csv",
+        config['output_dir']+f"/coverage_diagnostics_",
+        config['output_dir']+f"/aggregated_diversity.csv",
+        config['output_dir']+f"/aggregated_entropy.csv",
+        config['output_dir']+f"/cooccurring_mutations.csv",
+        config['output_dir']+f"/all_mutations.csv",
     default_target: True
 
 
@@ -24,7 +24,7 @@ rule coverage_diagnostics:
     input:
         fnames=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
     output:
-        out_dir=f"results/coverage_diagnostics_"
+        out_dir=config['output_dir']+f"/coverage_diagnostics_"
     resources:
         mem_mb=6024,
         time_min=840,
@@ -55,8 +55,8 @@ rule collect_diversity:
             "{dataset}/variants/SNVs/position_shannon_entropy.csv", dataset=vpipe.datasets
         ),
     output:
-        diversity_csv=f"results/aggregated_diversity.csv",
-        shannon_csv=f"results/aggregated_entropy.csv",
+        diversity_csv=config['output_dir']+f"/aggregated_diversity.csv",
+        shannon_csv=config['output_dir']+f"/aggregated_entropy.csv",
     conda:
         "envs/diversity_measures.yaml"
     script:
@@ -68,7 +68,7 @@ rule collect_cooccurring_mutations:
         dnames_shorah=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
         fname_reference=config['vpipe']['input']['reference'],
     output:
-        fname_cooccurring_mutations=f"results/cooccurring_mutations.csv",
+        fname_cooccurring_mutations=config['output_dir']+f"/cooccurring_mutations.csv",
     conda:
         "envs/co-occurring_mutations.yaml"
     script:
@@ -78,7 +78,7 @@ rule collect_all_mutations:
     input:
         dnames_shorah=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
     output:
-        fname_all_mutations=f"results/all_mutations.csv",
+        fname_all_mutations=config['output_dir']+f"/all_mutations.csv",
     conda:
         "envs/co-occurring_mutations.yaml"
     script:

@@ -6,18 +6,59 @@ def load_config(path):
     return config
 
 
-module parental_stock:
+module parental_stock_ref_Cha:
     snakefile:
         "../../../workflow/Snakefile"
     config:
-        load_config("config_parental_stock/config.yaml")
-    
-use rule * from parental_stock as parental_stock_*
+        load_config("config_parental_stock_ref_Cha/config.yaml")
 
+use rule * from parental_stock_ref_Cha as parental_stock_ref_Cha_*
+
+"""
+module parental_stock_ref_EBref:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_parental_stock_ref_EBref/config.yaml")
+
+use rule * from parental_stock_ref_EBref as parental_stock_ref_EBref_*
+
+
+
+module wild_type:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_wild_type/config.yaml")
+
+use rule * from wild_type as wild_type_*
+
+
+module dicer_over_expressing:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_dicer_over_expressing/config.yaml")
+
+use rule * from dicer_over_expressing as dicer_over_expressing_*
+
+
+module dicer_KO:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_dicer_KO/config.yaml")
+
+use rule * from dicer_KO as dicer_KO_*
+
+"""
 
 # define required output files
 rule all:
     input:
-        parental_stock.rules.vpipe_all.input,
-        parental_stock.config['post-processing']['output']['datadir']+'/coverage_diagnostics_', # f"",
+        rules.parental_stock_ref_Cha_all.input,
+        #rules.parental_stock_ref_EBref_all.input,
+        #rules.wild_type_all.input,
+        #rules.dicer_over_expressing_all.input,
+        #rules.dicer_KO_all.input,
     default_target: True

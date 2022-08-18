@@ -17,7 +17,7 @@ vpipe:
     time: 140
 
   output:
-      datadir: results/results_vpipe
+      datadir: results/parental_stock/results_vpipe
 
       snv: true
       local: true
@@ -25,3 +25,5 @@ vpipe:
       visualization: false
       diversity: false
       QA: false
+
+output_dir: results/parental_stock
