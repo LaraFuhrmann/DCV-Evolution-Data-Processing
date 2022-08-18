@@ -1,0 +1,29 @@
+vpipe:
+  general:
+      aligner: "bwa"
+      snv_caller: "shorah"
+
+  input:
+      reference: results/parental_stock/results_vpipe/parental_stock/DCV_PO/references/consensus.bcftools.fasta
+      datadir: ../samples/wild_type
+      read_length: 100
+      samples_file: samples_wild_type.tsv
+      paired: true
+
+  snv:
+    consensus: false
+
+  shorah:
+    time: 140
+
+  output:
+      datadir: results/wild_type/results_vpipe
+
+      snv: true
+      local: true
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+output_dir: results/wild_type

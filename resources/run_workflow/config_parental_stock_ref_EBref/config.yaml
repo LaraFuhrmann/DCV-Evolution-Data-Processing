@@ -1,7 +1,7 @@
 vpipe:
   general:
       aligner: "bwa"
-      snv_caller: "lofreq"
+      snv_caller: "shorah"
 
   input:
       reference: ../references/DCV_EBref.fasta
@@ -13,8 +13,11 @@ vpipe:
   snv:
     consensus: false
 
+  shorah:
+    time: 140
+
   output:
-      datadir: results/parental_stock/results_vpipe
+      datadir: results/results_vpipe
 
       snv: true
       local: true
@@ -23,9 +26,4 @@ vpipe:
       diversity: false
       QA: false
 
-post-processing:
-  input:
-    datadir: results/parental_stock/results_vpipe
-
-  output:
-    datadir: results/parental_stock
+output_dir: results/parental_stock_ref_EBref
