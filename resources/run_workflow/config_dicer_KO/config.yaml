@@ -15,6 +15,7 @@ vpipe:
 
   shorah:
     time: 140
+      threads: 100
 
   output:
       datadir: results/dicer_KO/results_vpipe

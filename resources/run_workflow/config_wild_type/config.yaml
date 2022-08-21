@@ -14,7 +14,8 @@ vpipe:
     consensus: false
 
   shorah:
-    time: 140
+    time: 240
+    threads: 100
 
   output:
       datadir: results/wild_type/results_vpipe

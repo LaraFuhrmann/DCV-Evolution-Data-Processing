@@ -15,6 +15,7 @@ vpipe:
 
   shorah:
     time: 140
+    threads: 200
 
   output:
       datadir: results/parental_stock_ref_Cha/results_vpipe
