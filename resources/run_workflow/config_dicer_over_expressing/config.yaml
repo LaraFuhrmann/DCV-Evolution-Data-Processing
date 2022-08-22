@@ -12,10 +12,8 @@ vpipe:
 
   snv:
     consensus: false
-
-  shorah:
     time: 240
-    threads: 200
+    threads: 64
 
   output:
       datadir: results/dicer_over_expressing/results_vpipe
