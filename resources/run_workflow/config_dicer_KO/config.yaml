@@ -12,7 +12,7 @@ vpipe:
 
   snv:
     consensus: false
-    time: 140
+    time: 340
     threads: 64
 
   output:
