@@ -12,7 +12,9 @@ vpipe:
 
   snv:
     consensus: false
-    time: 500
+    disk_mb: 1250
+    mem_mb: 35000
+    time_min: 6000
     threads: 64
 
   output:

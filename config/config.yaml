@@ -12,9 +12,10 @@ vpipe:
 
   snv:
     consensus: false
-
-  shorah:
-    time: 140
+    disk_mb: 1250
+    mem_mb: 35000
+    time_min: 6000
+    threads: 64
 
   output:
       datadir: results/parental_stock/results_vpipe
