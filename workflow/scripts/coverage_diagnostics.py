@@ -32,6 +32,7 @@ def main(file_list, out_dir):
         cov = int(row['coverage'])
         tmp_dict = {'cell_line':row['cell_line'],
                     'passage': row['passage'],
+                    'coverage': cov,
                     'start': start,
                     'end': end}
         for pos_tmp in range(start, end):
