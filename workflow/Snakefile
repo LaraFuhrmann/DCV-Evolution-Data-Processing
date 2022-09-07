@@ -4,7 +4,7 @@ min_version("6.0")
 configfile: "config/config.yaml"
 
 module vpipe:
-    snakefile: "../resources/V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
+    snakefile: "../../V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
     config: config["vpipe"] #"config/config_vpipe.yaml"
 
 use rule * from vpipe as vpipe_*
@@ -22,9 +22,9 @@ rule all:
 
 rule coverage_diagnostics:
     input:
-        fnames=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
+        fnames=expand(rules.vpipe_basecounts.output.COVERAGE, dataset=vpipe.datasets),
     output:
-        out_dir=config['output_dir']+f"/coverage_diagnostics_"
+        out_dir=config['output_dir']+f"/coverage_"
     resources:
         mem_mb=6024,
         time_min=840,
