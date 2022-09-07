@@ -17,6 +17,7 @@ rule all:
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
         config['output_dir']+f"/all_mutations.csv",
+        config['output_dir']+f"/all_consensus.fasta",
     default_target: True
 
 
@@ -83,3 +84,13 @@ rule collect_all_mutations:
         "envs/co-occurring_mutations.yaml"
     script:
         "./scripts/collect_mutations.py"
+
+rule collect_consensus_sequences:
+    input:
+        fnames_consensus = expand(rules.vpipe_consensus_bcftools.output.fname_fasta, dataset=vpipe.datasets),
+    output:
+        fname_merged = config['output_dir']+f"/all_consensus.fasta",
+    conda:
+        "envs/co-occurring_mutations.yaml"
+    script:
+        "./scripts/collect_consensus_sequences.py"
