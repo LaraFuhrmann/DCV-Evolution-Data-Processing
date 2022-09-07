@@ -10,6 +10,9 @@ vpipe:
       samples_file: samples_parental_stock.tsv
       paired: true
 
+  consensus_bcftools:
+      mask_coverage_threshold: 9999
+
   snv:
     consensus: false
     disk_mb: 1250
@@ -18,7 +21,7 @@ vpipe:
     threads: 64
 
   output:
-      datadir: results/results_vpipe
+      datadir: results/parental_stock_ref_EBref/results_vpipe
 
       snv: true
       local: true
