@@ -12,7 +12,7 @@ use rule * from vpipe as vpipe_*
 rule all:
     input:
         rules.vpipe_all.input,
-        config['output_dir']+f"/coverage_diagnostics_",
+        config['output_dir']+f"/coverage_",
         config['output_dir']+f"/aggregated_diversity.csv",
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
