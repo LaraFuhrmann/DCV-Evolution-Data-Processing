@@ -5,7 +5,7 @@ vpipe:
 
   input:
       reference: ../references/DCV_Cha.fasta
-      datadir: ../samples/parental_stock
+      datadir: ../../../../samples/parental_stock
       read_length: 100
       samples_file: samples_parental_stock.tsv
       paired: true

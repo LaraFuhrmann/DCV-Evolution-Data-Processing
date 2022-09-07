@@ -5,7 +5,7 @@ vpipe:
 
   input:
       reference: results/parental_stock/results_vpipe/parental_stock/DCV_PO/references/consensus.bcftools.fasta
-      datadir: ../samples/wild_type
+      datadir: ../../../../samples/wild_type
       read_length: 100
       samples_file: samples_wild_type.tsv
       paired: true

@@ -5,7 +5,7 @@ vpipe:
 
   input:
       reference: results/parental_stock/results_vpipe/parental_stock/DCV_PO/references/consensus.bcftools.fasta
-      datadir: ../samples/dicer_KO
+      datadir: ../../../../samples/dicer_KO
       read_length: 100
       samples_file: samples_dicer_KO.tsv
       paired: true

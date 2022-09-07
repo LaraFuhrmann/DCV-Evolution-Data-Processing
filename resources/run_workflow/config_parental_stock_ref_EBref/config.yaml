@@ -5,13 +5,10 @@ vpipe:
 
   input:
       reference: ../references/DCV_EBref.fasta
-      datadir: ../samples/parental_stock
+      datadir: ../../../../samples/parental_stock
       read_length: 100
       samples_file: samples_parental_stock.tsv
       paired: true
-
-  consensus_bcftools:
-      mask_coverage_threshold: 9999
 
   snv:
     consensus: false
