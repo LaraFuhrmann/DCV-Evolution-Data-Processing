@@ -3,7 +3,7 @@ We used `DCV_EBref.fasta` to align the reads of the parental stock. Based on tha
 `DCV_EBref.fasta` contains the UTRs that where not amplified in our experiments. Hence only <1000 reads align to regions of the UTRs.
 
 We are adjusting the `parental_stock.consensus.bcftools.fasta` sequence such that it excludes the UTRs.
-This means we exclude positions [0,24] and [9102, 9263] -- those positions all have less than 2000 coverage.
+This means we exclude positions [0,24] and [9102, 9263] -- those positions all have less than 9999 coverage.
 
 
 ```
