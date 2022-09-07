@@ -4,7 +4,7 @@ vpipe:
       snv_caller: "shorah"
 
   input:
-      reference: results/parental_stock/results_vpipe/parental_stock/DCV_PO/references/consensus.bcftools.fasta
+      reference: ../references/parental_stock.consensus.fasta
       datadir: ../../../../samples/dicer_over_expressing
       read_length: 100
       samples_file: samples_dicer_over_expressing.tsv
