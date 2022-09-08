@@ -4,7 +4,7 @@ import numpy as np
 
 def main(file_list, out_dir):
 
-    df = pd.DataFrame(columns=['experiment','cell_line','passage','fname', 'ref', 'start', 'end', 'coverage'])
+    df = pd.DataFrame(columns=['experiment','cell_line','passage','fname', 'ref', 'coverage'])
 
     for file in file_list:
 
@@ -16,11 +16,12 @@ def main(file_list, out_dir):
             df_temp = pd.read_csv(file, sep='\t', header=0 )
 
             column_coverage = df_temp.columns[-1]
-            df_temp.rename(columns={column_coverage: "coverage"})
+            df_temp = df_temp.rename(columns={column_coverage: "coverage"})
 
             df_temp['experiment']=experiment
             df_temp['cell_line']=patient
             df_temp['passage']=date
+            df_temp['fname']=file
 
             df=pd.concat([df,df_temp])
         else:
