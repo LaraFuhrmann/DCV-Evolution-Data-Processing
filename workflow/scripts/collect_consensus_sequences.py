@@ -18,7 +18,8 @@ def main(fnames_consensus, fname_merged_out):
             for record in SeqIO.parse(fname_consensus, 'fasta'):
 
                 new_seq = str(record.seq)
-                my_seqs.append(SeqRecord(Seq(new_seq), id = experiment+'-'+patient'-'+date))
+                new_id = experiment+'-'+patient'-'+date
+                my_seqs.append(SeqRecord(Seq(new_seq), id = new_id))
 
         SeqIO.write(my_seqs, out_f, "fasta")
 
