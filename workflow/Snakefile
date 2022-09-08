@@ -12,7 +12,8 @@ use rule * from vpipe as vpipe_*
 rule all:
     input:
         rules.vpipe_all.input,
-        config['output_dir']+f"/coverage_",
+        config['output_dir']+f"/coverage_all.csv",
+        config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
         config['output_dir']+f"/aggregated_diversity.csv",
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
@@ -25,8 +26,8 @@ rule coverage_diagnostics:
     input:
         fnames=expand(rules.vpipe_basecounts.output.COVERAGE, dataset=vpipe.datasets),
     output:
-        fname_coverage_all=config['output_dir']+f"/coverage_all.csv"
-        fname_coverage_plt=config['output_dir']+f"/coverage_distribution_1000coverage.pdf"
+        fname_coverage_all=config['output_dir']+f"/coverage_all.csv",
+        fname_coverage_plt=config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
     resources:
         mem_mb=6024,
         time_min=840,
