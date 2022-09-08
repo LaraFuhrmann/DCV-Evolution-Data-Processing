@@ -53,7 +53,7 @@ def main(file_list, out_dir):
             ax[idx_rep][idx_vp].set_title(vp)
             ax[idx_rep][idx_vp].set_ylabel(rep)
 
-            ax[idx_rep][idx_vp].plot(1000*np.ones(len(x_pos)), color='red')
+            ax[idx_rep][idx_vp].plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
             #ax[idx_rep][idx_vp].set_yscale('log')
 
     plt.savefig(out_dir+experiment+'_coverage_distribution_1000coverage.pdf',format='pdf')
