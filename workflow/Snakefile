@@ -87,7 +87,7 @@ rule collect_all_mutations:
 
 rule collect_consensus_sequences:
     input:
-        fnames_consensus = expand(rules.vpipe_consensus_bcftools.output.fname_fasta, dataset=vpipe.datasets),
+        fnames_consensus = expand(rules.vpipe_consensus_sequences.output.REF_majority_dels, dataset=vpipe.datasets),
     output:
         fname_merged = config['output_dir']+f"/all_consensus.fasta",
     conda:
