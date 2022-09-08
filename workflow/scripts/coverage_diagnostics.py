@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import numpy as np
 
-def main(file_list, out_dir):
+def main(file_list, fname_coverage_all, fname_coverage_plt):
 
     df = pd.DataFrame(columns=['experiment','cell_line','passage','fname', 'ref', 'coverage'])
 
@@ -27,7 +27,7 @@ def main(file_list, out_dir):
         else:
             print('Not found: ',coverage_path)
 
-    df.to_csv(out_dir+'coverage_all.csv')
+    df.to_csv(fname_coverage_all)
 
 
     # plotting for each cell_line and passage separatly.
@@ -57,11 +57,12 @@ def main(file_list, out_dir):
             ax[idx_rep][idx_vp].plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
             #ax[idx_rep][idx_vp].set_yscale('log')
 
-    plt.savefig(out_dir+experiment+'_coverage_distribution_1000coverage.pdf',format='pdf')
+    plt.savefig(fname_coverage_plt,format='pdf')
 
 
 if __name__ == "__main__":
     main(
         snakemake.input.fnames,
-        snakemake.output.out_dir,
+        snakemake.output.fname_coverage_all,
+        snakemake.output.fname_coverage_plt,
     )

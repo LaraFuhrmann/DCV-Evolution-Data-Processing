@@ -25,7 +25,8 @@ rule coverage_diagnostics:
     input:
         fnames=expand(rules.vpipe_basecounts.output.COVERAGE, dataset=vpipe.datasets),
     output:
-        out_dir=config['output_dir']+f"/coverage_"
+        fname_coverage_all=config['output_dir']+f"/coverage_all.csv"
+        fname_coverage_plt=config['output_dir']+f"/coverage_distribution_1000coverage.pdf"
     resources:
         mem_mb=6024,
         time_min=840,
