@@ -8,7 +8,7 @@ def main(file_list, out_dir):
 
     for file in file_list:
 
-        experiment = file.split("/")[-5]
+        experiment = file.split("/")[-6]
         patient = file.split("/")[-4]
         date = file.split("/")[-3]
 
@@ -46,7 +46,7 @@ def main(file_list, out_dir):
             df_temp = df[df['cell_line'] == rep]
             df_temp = df_temp[df_temp['passage']==vp]
 
-            ax[idx_rep][idx_vp].set_xticks(np.arange(0, len(x_pos)+1, 1000))
+            ax[idx_rep][idx_vp].set_xticks(np.arange(0, len(df_temp['pos'].values)+1, 1000))
             ax[idx_rep][idx_vp].xaxis.set_tick_params(rotation=70)
             ax[idx_rep][idx_vp].plot(df_temp['pos'].values, df_temp['coverage'].values)
 
