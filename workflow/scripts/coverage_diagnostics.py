@@ -59,6 +59,23 @@ def main(file_list, fname_coverage_all, fname_coverage_plt):
 
     plt.savefig(fname_coverage_plt,format='pdf')
 
+    for idx_rep, rep in enumerate(replicates):
+        for idx_vp, vp in enumerate(passages):
+            df_temp = df[df['cell_line'] == rep]
+            df_temp = df_temp[df_temp['passage']==vp]
+
+            ax[idx_rep][idx_vp].set_xticks(np.arange(0, len(df_temp['pos'].values)+1, 1000))
+            ax[idx_rep][idx_vp].xaxis.set_tick_params(rotation=70)
+            ax[idx_rep][idx_vp].plot(df_temp['pos'].values, df_temp['coverage'].values)
+
+            ax[idx_rep][idx_vp].set_title(vp)
+            ax[idx_rep][idx_vp].set_ylabel(rep)
+
+            ax[idx_rep][idx_vp].plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
+            ax[idx_rep][idx_vp].set_yscale('log')
+
+    plt.savefig(fname_coverage_plt+'.log.pdf',format='pdf')
+
 
 if __name__ == "__main__":
     main(
