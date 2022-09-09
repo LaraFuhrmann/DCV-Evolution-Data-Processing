@@ -7,13 +7,9 @@ def main(fnames_consensus, fname_merged_out):
     with open(fname_merged_out, 'w') as out_f:
         my_seqs = []
         for fname_consensus in fnames_consensus:
-            experiment = fname_consensus.split("/")[-5]
+            experiment = fname_consensus.split("/")[-6]
             patient = fname_consensus.split("/")[-4]
             date = fname_consensus.split("/")[-3]
-
-            print('experiment ', experiment)
-            print('patient ', patient)
-            print('date ', date)
 
             for record in SeqIO.parse(fname_consensus, 'fasta'):
 
