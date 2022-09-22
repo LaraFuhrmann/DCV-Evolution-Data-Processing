@@ -43,6 +43,7 @@ def mutation_spectrum(df_mutations, bins):
 
 def population_nucleotide_diversity(df_mutations, length):
     # only the positions with mutations are needed
+    pi = 0
     for position_temp in list_polymorphic_sites(df_mutations, minor_allele_frequency=0):
         df_temp = df_mutations[df_mutations["position"] == position_temp]
         N = df_temp["coverage"].unique()[0]
@@ -273,17 +274,3 @@ if __name__ == "__main__":
         snakemake.output.diversity_csv,
         snakemake.output.shannon_csv,
     )
-
-"""
-
-
-import sys
-if __name__ == "__main__":
-    main(
-        "/Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/snvs.vcf",
-        "/Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/resources/reference/ancestor_consensus.fasta",
-        "/Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/diversity_measures.csv",
-        "/Users/lfuhrmann/Documents/Projects/HIV-1-LTE/HIV-1-Long-Term-Evolution-Data-Processing/results/position_shannon_entropy.csv"
-    )
-
-"""
