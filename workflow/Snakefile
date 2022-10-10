@@ -96,3 +96,26 @@ rule collect_consensus_sequences:
         "envs/co-occurring_mutations.yaml"
     script:
         "./scripts/collect_consensus_sequences.py"
+
+rule annotate_vcf:
+    input:
+        fname_snvs_vcf="{dataset}/variants/SNVs/snvs.vcf",
+        fname_genbank_file="resources/references/dcv_eb_ref_annotation_genomic.gbff",
+    output:
+        fname_snvs_vcf="{dataset}/variants/SNVs/snvs.annotated.vcf",
+    params:
+        path_vcf_annotator="resources/vcf-annotator/vcf-annotator.py",
+    conda:
+        "envs/annotate_vcf.yaml"
+    script:
+        "./scripts/annotate_vcf.py"
+
+rule collect_annotated_mutations:
+    input:
+        fnames_snv_csv=expand("{dataset}/variants/SNVs/snvs.annotated.vcf", dataset=vpipe.datasets),
+    output:
+        fname_all_mutations=config['output_dir']+f"/all_mutations.annotated.csv",
+    conda:
+        "envs/annotate_vcf.yaml"
+    script:
+        "./scripts/collect_annotated_mutations.py"
