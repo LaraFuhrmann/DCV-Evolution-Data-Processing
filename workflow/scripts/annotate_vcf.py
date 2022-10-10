@@ -21,6 +21,7 @@ def transform_to_EB_space(in_vcf, out_vcf):
     vf = pyvcf.VcfFrame.from_file(in_vcf)
     vf.df['POS'] = vf.df['POS']+25
     vf.df['CHROM'] = 'AF014388'
+    vf.df.loc[vf.df.ALT == "-", "ALT"] = ""
     vf.to_file(out_vcf)
 
 def run_vcf_annotator(in_vcf, path_vcf_annotator, genbank_file, out_vcf):
