@@ -18,6 +18,7 @@ rule all:
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
         config['output_dir']+f"/all_mutations.csv",
+        config['output_dir']+f"/all_mutations.annotated.csv",
         config['output_dir']+f"/all_consensus.fasta",
     default_target: True
 
