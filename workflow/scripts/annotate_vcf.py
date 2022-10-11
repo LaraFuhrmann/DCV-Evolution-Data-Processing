@@ -30,8 +30,8 @@ def run_vcf_annotator(in_vcf, path_vcf_annotator, genbank_file, out_vcf):
     subprocess.run(
         [
             "python3",
-            str(in_vcf),
             str(path_vcf_annotator),
+            str(in_vcf),
             str(genbank_file),
             "--output",
             out_vcf,
@@ -49,7 +49,7 @@ def main(fname_snv_in, path_vcf_annotator, fname_genbank_file, fname_snv_out):
 if __name__ == "__main__":
     main(
         snakemake.input.fname_snvs_vcf,
-        snakemake.input.fname_genbank_file,
         snakemake.params.path_vcf_annotator,
+        snakemake.input.fname_genbank_file,
         snakemake.output.fname_snvs_vcf,
     )
