@@ -30,8 +30,8 @@ def run_vcf_annotator(in_vcf, path_vcf_annotator, genbank_file, out_vcf):
     subprocess.run(
         [
             "python3",
-            str(path_vcf_annotator),
             str(in_vcf),
+            str(path_vcf_annotator),
             str(genbank_file),
             "--output",
             out_vcf,
