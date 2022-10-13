@@ -17,13 +17,33 @@ def transform_to_EB_space(in_vcf, out_vcf):
     This means we exclude positions [0,24] and [9102, 9263] --
     those positions all have less than 9999 coverage.
     --> to map back we need to add 25 to the POS column.
+
+    ---
+    There is an insertion in the parental_stock.consensus.bcftools.fasta at
+    position 273, we have T --> TG.
+    To move back to the EB ref space, we do the following:
+
+    248 --> +25 = 273 [corresponds to T in EB ref]
+    249 --> delete [this is where the insertion "G" is]
+    250 --> +24 = 274 [corresponds to A in EB ref]
     """
     vf = pyvcf.VcfFrame.from_file(in_vcf)
-    vf.df['POS'] = vf.df['POS']+25
     vf.df['CHROM'] = 'AF014388'
+    # exclude deletions since vcf-annotator does not know how to treat them in this form.
     vf.df = vf.df[vf.df['ALT']!='-']
-    #vf.df.loc[vf.df.ALT == "-", "ALT"] = ""
+
+    # exclude mutations at position 249
+    vf.df = vf.df[vf.df['POS']!=249]
+    vf.df['POS'] = vf.df.apply(f_shift, axis=1)
+
     vf.to_file(out_vcf)
+
+def f_shift(row):
+    if row['POS'] <= 248:
+        val = row['POS']+25
+    elif row['POS'] >= 250:
+        val = row['POS']+24
+    return val
 
 def run_vcf_annotator(in_vcf, path_vcf_annotator, genbank_file, out_vcf):
 
@@ -41,8 +61,15 @@ def run_vcf_annotator(in_vcf, path_vcf_annotator, genbank_file, out_vcf):
 
 def main(fname_snv_in, path_vcf_annotator, fname_genbank_file, fname_snv_out):
 
+    sample = str(fname_snv_out).split("/variants")[0].split("/")[-4]
     fname_snv_temp = str(fname_snv_in).split('.vcf')[0]+'.temp.vcf'
-    transform_to_EB_space(fname_snv_in, fname_snv_temp)
+
+    if sample != "parental_stock_ref_EBref":
+        transform_to_EB_space(fname_snv_in, fname_snv_temp)
+    else:
+        # if we are processing the parental_stock
+        fname_snv_temp = fname_snv_in
+
     run_vcf_annotator(fname_snv_temp, path_vcf_annotator, fname_genbank_file, fname_snv_out)
 
 
