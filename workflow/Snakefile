@@ -20,6 +20,7 @@ rule all:
         config['output_dir']+f"/all_mutations.csv",
         config['output_dir']+f"/all_mutations.annotated.csv",
         config['output_dir']+f"/all_consensus.fasta",
+        config['output_dir']+f"/all_mutations.EB_space.csv",
     default_target: True
 
 
@@ -87,6 +88,16 @@ rule collect_all_mutations:
         "envs/co-occurring_mutations.yaml"
     script:
         "./scripts/collect_mutations.py"
+
+rule transfrom_mutations_to_EB_space:
+    input:
+        fname_all_mutations=config['output_dir']+f"/all_mutations.csv",
+    output:
+        fname_all_mutations_shifted=config['output_dir']+f"/all_mutations.EB_space.csv",
+    conda:
+        "envs/co-occurring_mutations.yaml"
+    script:
+        "./scripts/transfrom_mutations_to_EB_space.py"
 
 rule collect_consensus_sequences:
     input:
