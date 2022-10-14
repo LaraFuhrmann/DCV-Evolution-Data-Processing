@@ -88,7 +88,7 @@ rule transfrom_cooccurring_mutations_to_EB_space:
     conda:
         "envs/annotate_vcf.yaml"
     script:
-        "./scripts/transfrom_mutations_to_EB_space.py"
+        "./scripts/transfrom_cooccurring_mutations_to_EB_space.py"
 
 rule collect_all_mutations:
     input:
