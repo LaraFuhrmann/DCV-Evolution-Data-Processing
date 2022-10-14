@@ -21,6 +21,7 @@ rule all:
         config['output_dir']+f"/all_mutations.annotated.csv",
         config['output_dir']+f"/all_consensus.fasta",
         config['output_dir']+f"/all_mutations.EB_space.csv",
+        config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
     default_target: True
 
 
