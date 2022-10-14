@@ -82,10 +82,9 @@ rule collect_cooccurring_mutations:
 
 rule transfrom_cooccurring_mutations_to_EB_space:
     input:
-        dnames_shorah=expand(rules.vpipe_snv.output.VCF, dataset=vpipe.datasets),
-        fname_reference=config['vpipe']['input']['reference'],
+        fname_all_mutations=config['output_dir']+f"/cooccurring_mutations.csv",
     output:
-        fname_cooccurring_mutations=config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
+        fname_all_mutations_shifted=config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
     conda:
         "envs/annotate_vcf.yaml"
     script:
