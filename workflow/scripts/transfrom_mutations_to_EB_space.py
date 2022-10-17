@@ -13,7 +13,7 @@ def main(fname_all_mutations, fname_all_mutations_shifted):
 
     df_all_muts = pd.read_csv(fname_all_mutations)
 
-    sample = str(fname_all_mutations).split("/")[-1]
+    sample = str(fname_all_mutations).split("/")[-2]
 
     if sample != "parental_stock_ref_EBref":
         df_all_muts = df_all_muts[df_all_muts['Pos']!=249]
