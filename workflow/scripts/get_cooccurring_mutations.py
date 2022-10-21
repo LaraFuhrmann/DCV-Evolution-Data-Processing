@@ -77,7 +77,7 @@ def parseWindow(shorah_directory, line, ref1, threshold=0.9):
     # sequences in support file exceeding the posterior threshold
     for s in SeqIO.parse(window, 'fasta'):
         seq = str(s.seq).upper()
-        haplotype_id = str(s.id.split(" |")[0])+'-'+str(beg)+'-'+str(end)
+        haplotype_id = str(s.id.split("|")[0])+'-'+str(beg)+'-'+str(end)
         match_obj = search('posterior=(.*)\s*ave_reads=(.*)', s.description)
         post, av = float(match_obj.group(1)), float(match_obj.group(2))
         if post >= threshold:
