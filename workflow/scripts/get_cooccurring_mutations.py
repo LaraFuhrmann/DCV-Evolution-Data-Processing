@@ -14,6 +14,7 @@ SNP_id = namedtuple('SNP_id', ['pos', 'var'])
 @dataclass
 class SNV:
     chrom: str
+    haplotype_id: str
     pos: int
     ref: str
     var: str
@@ -76,6 +77,7 @@ def parseWindow(shorah_directory, line, ref1, threshold=0.9):
     # sequences in support file exceeding the posterior threshold
     for s in SeqIO.parse(window, 'fasta'):
         seq = str(s.seq).upper()
+        haplotype_id = str(s.id)+'-'+str(beg)+'-'+str(end)
         match_obj = search('posterior=(.*)\s*ave_reads=(.*)', s.description)
         post, av = float(match_obj.group(1)), float(match_obj.group(2))
         if post >= threshold:
@@ -110,7 +112,7 @@ def parseWindow(shorah_directory, line, ref1, threshold=0.9):
                                 reference_seq = ref1[chrom][
                                     (pos_prev - 1):(pos_prev + del_len)]
                                 snp[snp_id] = SNV(
-                                    chrom, pos_prev, reference_seq,
+                                    chrom, haplotype_id, pos_prev, reference_seq,
                                     reference_seq[0], av, post * av)
                     else:
                         tot_snv += 1
@@ -120,7 +122,7 @@ def parseWindow(shorah_directory, line, ref1, threshold=0.9):
                             snp[snp_id].support += post * av
                         else:
                             snp[snp_id] = SNV(
-                                chrom, pos, v, seq[idx], av, post * av)
+                                chrom, haplotype_id, pos, v, seq[idx], av, post * av)
                 pos += 1
             if tot_snv > max_snv:
                 max_snv = tot_snv
@@ -150,6 +152,7 @@ def main(fname_reference, shorah_directory):
 
             for SNV_id, val in sorted(snp.items()):
                 snv_dict = {'winFile': winFile,
+                            'haplotype_id': val.haplotype_id,
                             'chrom': chrom,
                             'start': beg,
                             'end': end,
