@@ -13,7 +13,7 @@ def main(fname_reference, dnames_shorah, fname_cooccurring_mutations_csv):
 
         shorah_dir = str(shorah_dir).split('snvs.vcf')[0]+"REGION_1/"
 
-        sample = shorah_dir.split('/')[-7]
+        sample = shorah_dir.split('/')[-8]
         patient = shorah_dir.split('/')[-6]
         date = shorah_dir.split('/')[-5]
 
