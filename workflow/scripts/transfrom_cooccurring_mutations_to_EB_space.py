@@ -15,7 +15,7 @@ def main(fname_all_mutations, fname_all_mutations_shifted):
 
     df_all_muts = pd.read_csv(fname_all_mutations)
 
-    sample = str(fname_all_mutations).split("/")[-1]
+    sample = str(df_all_muts['sample'][0])
 
     if sample != "parental_stock_ref_EBref":
         df_all_muts['position_EB_space'] = df_all_muts.apply(f_shift, axis=1)
