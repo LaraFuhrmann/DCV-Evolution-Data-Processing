@@ -8,7 +8,7 @@ and therefore must be mapped back to EB reference space.
 from fuc import pyvcf
 import subprocess
 
-def transform_to_EB_space(in_vcf, out_vcf):
+def transform_to_EB_space(in_vcf, out_vcf, sample):
     """
     adapt positions of mutation calls such that all is wrt the EB-reference space
     parental_stock.conensus.fasta.
@@ -32,9 +32,10 @@ def transform_to_EB_space(in_vcf, out_vcf):
     # exclude deletions since vcf-annotator does not know how to treat them in this form.
     vf.df = vf.df[vf.df['ALT']!='-']
 
-    # exclude mutations at position 249
-    vf.df = vf.df[vf.df['POS']!=249]
-    vf.df['POS'] = vf.df.apply(f_shift, axis=1)
+    if sample != "parental_stock_ref_EBref":
+        # exclude mutations at position 249
+        vf.df = vf.df[vf.df['POS']!=249]
+        vf.df['POS'] = vf.df.apply(f_shift, axis=1)
 
     vf.to_file(out_vcf)
 
@@ -64,11 +65,8 @@ def main(fname_snv_in, path_vcf_annotator, fname_genbank_file, fname_snv_out):
     sample = str(fname_snv_out).split("/variants")[0].split("/")[-4]
     fname_snv_temp = str(fname_snv_in).split('.vcf')[0]+'.temp.vcf'
 
-    if sample != "parental_stock_ref_EBref":
-        transform_to_EB_space(fname_snv_in, fname_snv_temp)
-    else:
-        # if we are processing the parental_stock
-        fname_snv_temp = fname_snv_in
+    transform_to_EB_space(fname_snv_in, fname_snv_temp, sample)
+
 
     run_vcf_annotator(fname_snv_temp, path_vcf_annotator, fname_genbank_file, fname_snv_out)
 
