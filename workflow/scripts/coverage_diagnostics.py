@@ -42,7 +42,7 @@ def main(file_list, fname_coverage_all, fname_coverage_plt):
         plt.plot(df['pos'].values, df['coverage'].values)
         plt.plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
         plt.xticks(np.arange(0, len(df['pos'].values)+1, 1000), rotation=70)
-        plt.set_yscale('log')
+        plt.yscale('log')
         plt.savefig(fname_coverage_plt+'.log.pdf',format='pdf')
 
 
