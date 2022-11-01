@@ -36,14 +36,12 @@ def main(file_list, fname_coverage_all, fname_coverage_plt):
     if cell_line == "parental_stock":
         plt.plot(df['pos'].values, df['coverage'].values)
         plt.plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
-        plt.xticks(np.arange(0, len(df['pos'].values)+1, 1000))
-        plt.xaxis.set_tick_params(rotation=70)
+        plt.xticks(np.arange(0, len(df['pos'].values)+1, 1000),rotation=70)
         plt.savefig(fname_coverage_plt,format='pdf')
 
         plt.plot(df['pos'].values, df['coverage'].values)
         plt.plot(1000*np.ones(len(df_temp['pos'].values)), color='red')
-        plt.xticks(np.arange(0, len(df['pos'].values)+1, 1000))
-        plt.xaxis.set_tick_params(rotation=70)
+        plt.xticks(np.arange(0, len(df['pos'].values)+1, 1000), rotation=70)
         plt.set_yscale('log')
         plt.savefig(fname_coverage_plt+'.log.pdf',format='pdf')
 
