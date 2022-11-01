@@ -22,9 +22,10 @@ def main(file_list, fname_coverage_all, fname_coverage_plt):
             df_temp = df_temp.rename(columns={column_coverage: "coverage"})
 
             df_temp['experiment']=experiment
-            df_temp['cell_line']=patient
+            df_temp['cell_line']=cell_line
             df_temp['passage']=date
             df_temp['fname']=file
+            cell_line = cell_line
 
             df=pd.concat([df,df_temp])
         else:
