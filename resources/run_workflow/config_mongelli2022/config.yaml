@@ -18,7 +18,7 @@ vpipe:
     threads: 64
 
   output:
-      datadir: results/Mongelli2022/results_vpipe
+      datadir: results/mongelli2022/results_vpipe
 
       snv: true
       local: true
@@ -27,4 +27,4 @@ vpipe:
       diversity: false
       QA: false
 
-output_dir: results/Mongelli2022
+output_dir: results/mongelli2022
