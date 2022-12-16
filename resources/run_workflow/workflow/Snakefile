@@ -23,7 +23,7 @@ module parental_stock_ref_EBref:
 
 use rule * from parental_stock_ref_EBref as parental_stock_ref_EBref_*
 
-"""
+
 
 module wild_type:
     snakefile:
@@ -32,7 +32,7 @@ module wild_type:
         load_config("config_wild_type/config.yaml")
 
 use rule * from wild_type as wild_type_*
-"""
+
 
 module dicer_over_expressing:
     snakefile:
@@ -41,8 +41,17 @@ module dicer_over_expressing:
         load_config("config_dicer_over_expressing/config.yaml")
 
 use rule * from dicer_over_expressing as dicer_over_expressing_*
+"""
 
+module mongelli2022:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_mongelli2022/config.yaml")
 
+use rule * from mongelli2022 as mongelli2022_*
+
+"""
 module dicer_KO:
     snakefile:
         "../../../workflow/Snakefile"
@@ -58,7 +67,8 @@ rule all:
     input:
         #rules.parental_stock_ref_Cha_all.input,
         #rules.parental_stock_ref_EBref_all.input,
-        rules.wild_type_all.input,
+        #rules.wild_type_all.input,
         #rules.dicer_over_expressing_all.input,
+        rules.mongelli2022_all.input,
         #rules.dicer_KO_all.input,
     default_target: True

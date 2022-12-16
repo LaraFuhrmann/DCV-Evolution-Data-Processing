@@ -1,0 +1,27 @@
+Data from the publication Mongelli, Vanesa, et al. "Innate immune pathways act synergistically to constrain RNA virus evolution in Drosophila melanogaster." Nature ecology & evolution 6.5 (2022): 565-578.
+
+We are intereseted in the following two samples from the same replicate:
+- wildtype (w1118) - VP1 -rep1: https://www.ncbi.nlm.nih.gov/sra/SRX13234238[accn]
+- WT - VP2 - rep1: https://www.ncbi.nlm.nih.gov/sra/SRX13234411[accn]
+- WT - VP2 - rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234404[accn
+- Wt - VP5 - rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234275[accn]
+- WT - VP9 - rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234410[accn]
+- WT - VP10 - rep1: https://www.ncbi.nlm.nih.gov/sra/SRX13234371[accn]
+- WT - VP10 -rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234243[accn]
+
+What is the reference here? EB reference ? or our consensus sequence?
+
+
+Download the data on Euler cluster:
+```
+module load sra-toolkit/2.10.5
+fastq-dump -O output_dir SRA_number
+```
+where SRA number = SRRXXXXXX.
+
+Why do we want to analyze those samples?
+- do we find the deletion in the polymerase
+- what do we find there in the capside protein
+- Validation of the hypothesis by contrasting the results with Carla’s results:
+  - Polymerase deletion: Is it also present in their data? -> is it caused by the error of the polymerase? we should check if there is an enrichment of deletions on poly T regions. Also check deletion in 5’UTR
+  - CP2 protein mutations: Also present in her data? -> adaptation from cell to in vivo environment. Not present -> adaptation to new infection system?
