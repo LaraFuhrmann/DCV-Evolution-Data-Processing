@@ -6,9 +6,9 @@ vpipe:
   input:
       reference: ../references/parental_stock.consensus.fasta
       datadir: ../../../../samples/Mongelli2022
-      read_length: 100
+      read_length: 130
       samples_file: samples_parental_stock.tsv
-      paired: true
+      paired: false
 
   snv:
     consensus: false
