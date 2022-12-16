@@ -7,7 +7,7 @@ vpipe:
       reference: ../references/parental_stock.consensus.fasta
       datadir: ../../../../samples/mongelli2022
       read_length: 130
-      samples_file: samples_parental_stock.tsv
+      samples_file: samples_mongelli2022.tsv
       paired: false
 
   snv:
