@@ -144,7 +144,7 @@ rule collect_annotated_mutations:
     script:
         "./scripts/collect_annotated_mutations.py"
 
-rule annotate_vcf:
+rule corrected_annotate_vcf:
     input:
         fname_snvs_vcf="{dataset}/variants/SNVs/snvs.vcf",
         fname_genbank_file="resources/references/dcv_eb_ref_annotation_genomic.gbff",
@@ -153,9 +153,9 @@ rule annotate_vcf:
     conda:
         "envs/annotate_vcf.yaml"
     script:
-        "./scripts/annotate_vcf.py"
+        "./scripts/corrected_annotate_vcf.py"
 
-rule collect_annotated_mutations:
+rule corrected_collect_annotated_mutations:
     input:
         fnames_snv_csv=expand("{dataset}/variants/SNVs/snvs.annotated.corrected.vcf", dataset=vpipe.datasets),
     output:
