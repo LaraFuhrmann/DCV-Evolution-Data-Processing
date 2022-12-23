@@ -64,7 +64,7 @@ def add_vcf_DP_and_AF(vcf_in, vcf_out):
     vf.to_file(vcf_out)
 
 
-def run_snpgenie(fname_reference, in_vcf, gtffile_CDS_annotations):
+def run_snpgenie(fname_reference, in_vcf, gtffile_CDS_annotations, dname_work):
     """
     WITHIN-POOL ANALYSIS. Use snpgenie.pl, the original SNPGenie.
     Analyzes within-sample πN/πS from pooled NGS SNP data.
@@ -79,15 +79,17 @@ def run_snpgenie(fname_reference, in_vcf, gtffile_CDS_annotations):
             "--fastafile=" + str(fname_reference),
             "--gtffile=" + str(gtffile_CDS_annotations),
             "--minfreq=0.001",
+            "--outdir="+str(dname_work)
         ],
         check=True,
+        #cwd=dname_work,
     )
 
 
-def main(fname_reference, fname_snv_in, gtffile_CDS_annotations):
+def main(fname_reference, fname_snv_in, gtffile_CDS_annotations, dname_work):
 
     # map vcf file to EB ref
-    sample = str(fname_snv_out).split("/variants")[0].split("/")[-4]
+    sample = str(fname_snv_in).split("/variants")[0].split("/")[-4]
     fname_snv_temp = str(fname_snv_in).split(".vcf")[0] + ".temp.vcf"
     transform_to_EB_space(fname_snv_in, fname_snv_temp, sample)
 
@@ -95,7 +97,7 @@ def main(fname_reference, fname_snv_in, gtffile_CDS_annotations):
     add_vcf_DP_and_AF(fname_snv_temp, fname_snv_temp)
 
     # run snpgenie
-    run_snpgenie(fname_reference, fname_snv_temp, gtffile_CDS_annotations)
+    run_snpgenie(fname_reference, fname_snv_temp, gtffile_CDS_annotations, dname_work)
 
 
 if __name__ == "__main__":
@@ -103,4 +105,5 @@ if __name__ == "__main__":
         snakemake.input.fname_reference,
         snakemake.input.fname_snvs_vcf,
         snakemake.input.fname_gtffile,
+        snakemake.output.dname_work
     )

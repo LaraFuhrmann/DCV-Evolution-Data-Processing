@@ -175,10 +175,11 @@ rule run_snpgenie:
         fname_reference="resources/references/parental_stock.consensus.bcftools.fasta",
         fname_gtffile="resources/references/dcv_CDS_annotations.gtf",
     output:
-        fname_codon="{dataset}/variants/SNVs/SNPGenie_Results/codon_results.txt",
-        fname_population_summary="{dataset}/variants/SNVs/SNPGenie_Results/population_summary.txt",
-        fname_product_results="{dataset}/variants/SNVs/SNPGenie_Results/product_results.txt",
-        fname_site_results="{dataset}/variants/SNVs/SNPGenie_Results/site_results.txt",
+        fname_codon="{dataset}/variants/SNVs/SNPGenie_Results_work/codon_results.txt",
+        fname_population_summary="{dataset}/variants/SNVs/SNPGenie_Results_work/population_summary.txt",
+        fname_product_results="{dataset}/variants/SNVs/SNPGenie_Results_work/product_results.txt",
+        fname_site_results="{dataset}/variants/SNVs/SNPGenie_Results_work/site_results.txt",
+        dname_work="{dataset}/variants/SNVs/SNPGenie_Results_work/",
     conda:
         "envs/snpgenie.yaml"
     script:
@@ -186,10 +187,10 @@ rule run_snpgenie:
 
 rule collect_snpgenie:
     input:
-        fname_codon=expand("{dataset}/variants/SNVs/SNPGenie_Results/codon_results.txt", dataset=vpipe.datasets),
-        fname_population_summary=expand("{dataset}/variants/SNVs/SNPGenie_Results/population_summary.txt", dataset=vpipe.datasets),
-        fname_product_results=expand("{dataset}/variants/SNVs/SNPGenie_Results/product_results.txt", dataset=vpipe.datasets),
-        fname_site_results=expand("{dataset}/variants/SNVs/SNPGenie_Results/site_results.txt", dataset=vpipe.datasets),
+        fname_codon=expand("{dataset}/variants/SNVs/SNPGenie_Results_work/codon_results.txt", dataset=vpipe.datasets),
+        fname_population_summary=expand("{dataset}/variants/SNVs/SNPGenie_Results_work/population_summary.txt", dataset=vpipe.datasets),
+        fname_product_results=expand("{dataset}/variants/SNVs/SNPGenie_Results_work/product_results.txt", dataset=vpipe.datasets),
+        fname_site_results=expand("{dataset}/variants/SNVs/SNPGenie_Results_work/site_results.txt", dataset=vpipe.datasets),
     output:
         fname_codon=config['output_dir']+f"/snpgenie_codon_results.csv",
         fname_population_summary=config['output_dir']+f"/snpgenie_population_summary.csv",
