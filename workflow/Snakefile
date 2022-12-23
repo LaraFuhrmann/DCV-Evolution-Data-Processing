@@ -171,14 +171,14 @@ rule corrected_collect_annotated_mutations:
 
 rule run_snpgenie:
     input:
-        fname_snvs_vcf="{dataset}/variants/SNVs/snvs.vcf"
-        fname_reference="resources/references/parental_stock.consensus.bcftools.fasta"
-        fname_gtffile="resources/references/dcv_CDS_annotations.gtf"
+        fname_snvs_vcf="{dataset}/variants/SNVs/snvs.vcf",
+        fname_reference="resources/references/parental_stock.consensus.bcftools.fasta",
+        fname_gtffile="resources/references/dcv_CDS_annotations.gtf",
     output:
-        fname_codon="{dataset}/variants/SNVs/SNPGenie_Results/codon_results.txt"
-        fname_population_summary="{dataset}/variants/SNVs/SNPGenie_Results/population_summary.txt"
-        fname_product_results="{dataset}/variants/SNVs/SNPGenie_Results/product_results.txt"
-        fname_site_results="{dataset}/variants/SNVs/SNPGenie_Results/site_results.txt"
+        fname_codon="{dataset}/variants/SNVs/SNPGenie_Results/codon_results.txt",
+        fname_population_summary="{dataset}/variants/SNVs/SNPGenie_Results/population_summary.txt",
+        fname_product_results="{dataset}/variants/SNVs/SNPGenie_Results/product_results.txt",
+        fname_site_results="{dataset}/variants/SNVs/SNPGenie_Results/site_results.txt",
     conda:
         "envs/snpgenie.yaml"
     script:
