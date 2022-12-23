@@ -23,23 +23,25 @@ def transform_to_EB_space(in_vcf, out_vcf, sample):
     250 --> +24 = 274 [corresponds to A in EB ref]
     """
     vf = pyvcf.VcfFrame.from_file(in_vcf)
-    vf.df['CHROM'] = 'AF014388'
+    vf.df["CHROM"] = "AF014388"
     # exclude deletions since vcf-annotator does not know how to treat them in this form.
-    vf.df = vf.df[vf.df['ALT']!='-']
+    vf.df = vf.df[vf.df["ALT"] != "-"]
 
     if sample != "parental_stock_ref_EBref":
         # exclude mutations at position 249
-        vf.df = vf.df[vf.df['POS']!=249]
-        vf.df['POS'] = vf.df.apply(f_shift, axis=1)
+        vf.df = vf.df[vf.df["POS"] != 249]
+        vf.df["POS"] = vf.df.apply(f_shift, axis=1)
 
     vf.to_file(out_vcf)
 
+
 def f_shift(row):
-    if row['POS'] <= 248:
-        val = row['POS']+25
-    elif row['POS'] >= 250:
-        val = row['POS']+24
+    if row["POS"] <= 248:
+        val = row["POS"] + 25
+    elif row["POS"] >= 250:
+        val = row["POS"] + 24
     return val
+
 
 def add_vcf_DP_and_AF(vcf_in, vcf_out):
     """
@@ -48,16 +50,16 @@ def add_vcf_DP_and_AF(vcf_in, vcf_out):
     """
     vf = pyvcf.VcfFrame.from_file(vcf_in)
 
-    Rtot = vf.df['INFO'].str.split('Rtot=').str[1].str.split(';').str[0]
-    Ftot = vf.df['INFO'].str.split('Ftot=').str[1].str.split(';').str[0]
-    DP = Rtot.astype('int') + Ftot.astype('int')
+    Rtot = vf.df["INFO"].str.split("Rtot=").str[1].str.split(";").str[0]
+    Ftot = vf.df["INFO"].str.split("Ftot=").str[1].str.split(";").str[0]
+    DP = Rtot.astype("int") + Ftot.astype("int")
 
-    Rvar = vf.df['INFO'].str.split('Rvar=').str[1].str.split(';').str[0]
-    Fvar = vf.df['INFO'].str.split('Fvar=').str[1].str.split(';').str[0]
-    AF = ( Rvar.astype('int') + Fvar.astype('int') ) / DP
+    Rvar = vf.df["INFO"].str.split("Rvar=").str[1].str.split(";").str[0]
+    Fvar = vf.df["INFO"].str.split("Fvar=").str[1].str.split(";").str[0]
+    AF = (Rvar.astype("int") + Fvar.astype("int")) / DP
 
-    vf.df['INFO'] = vf.df['INFO'] + ';DP='+ DP.astype('str')
-    vf.df['INFO'] = vf.df['INFO'] + ';AF='+ AF.astype('str')
+    vf.df["INFO"] = vf.df["INFO"] + ";DP=" + DP.astype("str")
+    vf.df["INFO"] = vf.df["INFO"] + ";AF=" + AF.astype("str")
 
     vf.to_file(vcf_out)
 
@@ -69,23 +71,24 @@ def run_snpgenie(fname_reference, in_vcf, gtffile_CDS_annotations):
 
     fname_reference: fasta of reference sequence wrt which the SNVs where called
     """
-     subprocess.run(
-         [
-             "snpgenie.pl",
-             "--vcfformat=2",
-             "--snpreport="+str(in_vcf),
-             "--fastafile="+str(fname_reference),
-             "--gtffile="+str(gtffile_CDS_annotations),
-             "--minfreq=0.001" # = 0.1%
-         ],
-         check=True,
-     )
+    subprocess.run(
+        [
+            "snpgenie.pl",
+            "--vcfformat=2",
+            "--snpreport=" + str(in_vcf),
+            "--fastafile=" + str(fname_reference),
+            "--gtffile=" + str(gtffile_CDS_annotations),
+            "--minfreq=0.001",
+        ],
+        check=True,
+    )
+
 
 def main(fname_reference, fname_snv_in, gtffile_CDS_annotations):
 
     # map vcf file to EB ref
     sample = str(fname_snv_out).split("/variants")[0].split("/")[-4]
-    fname_snv_temp = str(fname_snv_in).split('.vcf')[0]+'.temp.vcf'
+    fname_snv_temp = str(fname_snv_in).split(".vcf")[0] + ".temp.vcf"
     transform_to_EB_space(fname_snv_in, fname_snv_temp, sample)
 
     # add DP4 to vcf file
