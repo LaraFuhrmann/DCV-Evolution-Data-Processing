@@ -179,7 +179,7 @@ rule run_snpgenie:
         fname_population_summary="{dataset}/variants/SNVs/SNPGenie_Results_work/population_summary.txt",
         fname_product_results="{dataset}/variants/SNVs/SNPGenie_Results_work/product_results.txt",
         fname_site_results="{dataset}/variants/SNVs/SNPGenie_Results_work/site_results.txt",
-        dname_work="{dataset}/variants/SNVs/SNPGenie_Results_work/",
+        dname_work=directory("{dataset}/variants/SNVs/SNPGenie_Results_work/"),
     conda:
         "envs/snpgenie.yaml"
     script:

@@ -78,7 +78,7 @@ def run_snpgenie(fname_reference, in_vcf, gtffile_CDS_annotations, dname_work):
             "--snpreport=" + str(in_vcf),
             "--fastafile=" + str(fname_reference),
             "--gtffile=" + str(gtffile_CDS_annotations),
-            "--minfreq=0.001",
+            #"--minfreq=0.001",
             "--outdir="+str(dname_work)
         ],
         check=True,
@@ -90,7 +90,7 @@ def main(fname_reference, fname_snv_in, gtffile_CDS_annotations, dname_work):
 
     # map vcf file to EB ref
     sample = str(fname_snv_in).split("/variants")[0].split("/")[-4]
-    fname_snv_temp = str(fname_snv_in).split(".vcf")[0] + ".temp.vcf"
+    fname_snv_temp = str(fname_snv_in).split(".vcf")[0] + ".temp.snpgenie.vcf"
     transform_to_EB_space(fname_snv_in, fname_snv_temp, sample)
 
     # add DP4 to vcf file

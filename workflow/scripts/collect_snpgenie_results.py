@@ -17,7 +17,7 @@ def concat_files(in_files_list, out_fname):
 
         tmp.append(df)
 
-    pd.concat(tmp).write_csv(out_fname)
+    pd.concat(tmp).to_csv(out_fname)
 
 def main(
     in_fname_codon,
