@@ -96,6 +96,13 @@ def main(fname_reference, fname_snv_in, gtffile_CDS_annotations, dname_work):
     # add DP4 to vcf file
     add_vcf_DP_and_AF(fname_snv_temp, fname_snv_temp)
 
+    from pathlib import Path
+    import shutil
+
+    test = Path(dname_work)
+    if test.exists() and test.is_dir():
+        shutil.rmtree(test)
+
     # run snpgenie
     run_snpgenie(fname_reference, fname_snv_temp, gtffile_CDS_annotations, dname_work)
 
