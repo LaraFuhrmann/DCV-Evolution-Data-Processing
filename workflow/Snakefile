@@ -4,7 +4,7 @@ min_version("6.0")
 configfile: "config/config.yaml"
 
 module vpipe:
-    snakefile: "../../../V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
+    snakefile: "../../V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
     config: config["vpipe"] #"config/config_vpipe.yaml"
 
 use rule * from vpipe as vpipe_*
@@ -12,21 +12,21 @@ use rule * from vpipe as vpipe_*
 rule all:
     input:
         rules.vpipe_all.input,
-        config['output_dir']+f"/coverage_all.csv",
-        config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
+       # config['output_dir']+f"/coverage_all.csv",
+       # config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
         config['output_dir']+f"/aggregated_diversity.csv",
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
         config['output_dir']+f"/all_mutations.csv",
-        config['output_dir']+f"/all_mutations.annotated.csv",
-        config['output_dir']+f"/all_mutations.annotated.corrected.csv",
-        config['output_dir']+f"/all_consensus.fasta",
+       # config['output_dir']+f"/all_mutations.annotated.csv",
+       # config['output_dir']+f"/all_mutations.annotated.corrected.csv",
+       # config['output_dir']+f"/all_consensus.fasta",
         config['output_dir']+f"/all_mutations.EB_space.csv",
-        config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
-        config['output_dir']+f"/snpgenie_codon_results.csv",
-        config['output_dir']+f"/snpgenie_population_summary.csv",
-        config['output_dir']+f"/snpgenie_product_results.csv",
-        config['output_dir']+f"/snpgenie_site_results.csv",
+      #  config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
+       # config['output_dir']+f"/snpgenie_codon_results.csv",
+       # config['output_dir']+f"/snpgenie_population_summary.csv",
+       # config['output_dir']+f"/snpgenie_product_results.csv",
+       # config['output_dir']+f"/snpgenie_site_results.csv",
     default_target: True
 
 

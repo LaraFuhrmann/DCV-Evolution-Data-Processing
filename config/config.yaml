@@ -1,14 +1,14 @@
 vpipe:
   general:
-      aligner: "bwa"
+      aligner: "bowtie"
       snv_caller: "shorah"
 
   input:
-      reference: resources/references/DCV_EBref.fasta
-      datadir: resources/samples/parental_stock
-      read_length: 100
-      samples_file: samples_parental_stock.tsv
-      paired: true
+      reference: resources/references/parental_stock.consensus.fasta
+      datadir: resources/samples/deletion_analysis/ 
+      read_length: 90
+      samples_file: samples_deletion_sRNA.tsv
+      paired: true 
 
   snv:
     consensus: false
@@ -18,7 +18,7 @@ vpipe:
     threads: 64
 
   output:
-      datadir: results/parental_stock/results_vpipe
+      datadir: results/deletion_analysis/results_vpipe
 
       snv: true
       local: true
@@ -27,4 +27,5 @@ vpipe:
       diversity: false
       QA: false
 
-output_dir: results/parental_stock
+output_dir: results/deletion_analysis
+
