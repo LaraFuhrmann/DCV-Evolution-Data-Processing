@@ -12,21 +12,21 @@ use rule * from vpipe as vpipe_*
 rule all:
     input:
         rules.vpipe_all.input,
-       # config['output_dir']+f"/coverage_all.csv",
-       # config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
+        config['output_dir']+f"/coverage_all.csv",
+        config['output_dir']+f"/coverage_distribution_1000coverage.pdf",
         config['output_dir']+f"/aggregated_diversity.csv",
         config['output_dir']+f"/aggregated_entropy.csv",
         config['output_dir']+f"/cooccurring_mutations.csv",
         config['output_dir']+f"/all_mutations.csv",
-       # config['output_dir']+f"/all_mutations.annotated.csv",
-       # config['output_dir']+f"/all_mutations.annotated.corrected.csv",
-       # config['output_dir']+f"/all_consensus.fasta",
+        config['output_dir']+f"/all_mutations.annotated.csv",
+        config['output_dir']+f"/all_mutations.annotated.corrected.csv",
+        config['output_dir']+f"/all_consensus.fasta",
         config['output_dir']+f"/all_mutations.EB_space.csv",
-      #  config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
-       # config['output_dir']+f"/snpgenie_codon_results.csv",
-       # config['output_dir']+f"/snpgenie_population_summary.csv",
-       # config['output_dir']+f"/snpgenie_product_results.csv",
-       # config['output_dir']+f"/snpgenie_site_results.csv",
+        config['output_dir']+f"/cooccurring_mutations.EB_space.csv",
+        config['output_dir']+f"/snpgenie_codon_results.csv",
+        config['output_dir']+f"/snpgenie_population_summary.csv",
+        config['output_dir']+f"/snpgenie_product_results.csv",
+        config['output_dir']+f"/snpgenie_site_results.csv",
     default_target: True
 
 
