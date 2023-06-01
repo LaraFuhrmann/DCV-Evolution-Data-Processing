@@ -1,0 +1,31 @@
+vpipe:
+  general:
+      aligner: "bwa"
+      snv_caller: "shorah"
+
+  input:
+      reference: resources/references/parental_stock.consensus.fasta
+      datadir: resources/samples/deletion_analysis/ 
+      read_length: 130
+      samples_file: samples_deletion_old.tsv
+      paired: false 
+
+  snv:
+    consensus: false
+    disk_mb: 1250
+    mem_mb: 35000
+    time_min: 6000
+    threads: 64
+
+  output:
+      datadir: results/deletion_analysis/results_vpipe
+
+      snv: true
+      local: true
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+output_dir: results/deletion_analysis
+
