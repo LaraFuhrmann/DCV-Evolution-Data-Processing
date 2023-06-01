@@ -4,7 +4,7 @@ min_version("6.0")
 configfile: "config/config.yaml"
 
 module vpipe:
-    snakefile: "../../V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
+    snakefile: "../../../V-pipe/workflow/Snakefile" #github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v2.99.2") #"../V-Pipe-v2.99.2" #
     config: config["vpipe"] #"config/config_vpipe.yaml"
 
 use rule * from vpipe as vpipe_*
