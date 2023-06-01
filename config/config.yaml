@@ -4,8 +4,8 @@ vpipe:
       snv_caller: "shorah"
 
   input:
-      reference: ../references/DCV_EBref.fasta
-      datadir: ../../../../samples/parental_stock
+      reference: resources/references/DCV_EBref.fasta
+      datadir: resources/samples/parental_stock
       read_length: 100
       samples_file: samples_parental_stock.tsv
       paired: true
