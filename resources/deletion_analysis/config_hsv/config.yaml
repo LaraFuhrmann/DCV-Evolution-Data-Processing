@@ -4,10 +4,11 @@ vpipe:
       snv_caller: "shorah"
 
   input:
-      reference: resources/references/XX.fasta # TODO: Add reference
+      reference: resources/references/hsv.fasta # https://www.ncbi.nlm.nih.gov/nuccore/MK855052
       datadir: resources/samples/deletion_analysis_hsv/
       samples_file: samples_deletion_analysis_hsv.tsv
-      paired: false
+      paired: true
+      read_length: 250
 
   snv:
     consensus: false
