@@ -15,3 +15,5 @@ fastq-dump -O resources/samples/deletion_analysis_dcv/mongelli2022/dcrKO_P10/raw
 fastq-dump -O resources/samples/deletion_analysis_dcv/mongelli2022/WT_p1/raw_data/  SRR17044623
 
 fastq-dump -O resources/samples/deletion_analysis_hsv/munoz2021/hsv2_wt/raw_data/ --split-3 ERR3278849
+
+fastq-dump -O resources/samples/deletion_analysis_dcv/mongelli2022/WT_p10/raw_data/ SRR17044490 # WT repa P10
