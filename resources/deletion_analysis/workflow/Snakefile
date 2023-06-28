@@ -1,0 +1,31 @@
+from snakemake.io import load_configfile
+
+# setup workflow
+def load_config(path):
+    config = load_configfile(path)
+    return config
+
+module deletion_analysis_hsv:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_hsv/config.yaml")
+
+use rule * from deletion_analysis_hsv as deletion_analysis_hsv_*
+
+module deletion_analysis_dcv:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_dcv/config.yaml")
+
+use rule * from deletion_analysis_dcv as deletion_analysis_dcv_*
+
+
+rule all:
+    input:
+        #rules.deletion_analysis_hsv_collect_all_mutations.output,
+        #rules.deletion_analysis_hsv_transfrom_mutations_to_EB_space.output,
+        rules.deletion_analysis_dcv_collect_all_mutations.output,
+        rules.deletion_analysis_dcv_transfrom_mutations_to_EB_space.output,
+    default_target: True

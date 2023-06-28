@@ -1,0 +1,30 @@
+vpipe:
+  general:
+      aligner: "bwa"
+      snv_caller: "shorah"
+
+  input:
+      reference: resources/references/hsv.fasta # https://www.ncbi.nlm.nih.gov/nuccore/MK855052
+      datadir: resources/samples/deletion_analysis_hsv/
+      samples_file: samples_deletion_analysis_hsv.tsv
+      paired: true
+      read_length: 250
+
+  snv:
+    consensus: false
+    disk_mb: 1250
+    mem_mb: 35000
+    time_min: 6000
+    threads: 64
+
+  output:
+      datadir: results/deletion_analysis_hsv/results_vpipe
+
+      snv: true
+      local: true
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+output_dir: results/deletion_analysis_hsv
