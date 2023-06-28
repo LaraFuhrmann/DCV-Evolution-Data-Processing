@@ -8,6 +8,7 @@ We are intereseted in the following two samples from the same replicate:
 - WT - VP9 - rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234410[accn]
 - WT - VP10 - rep1: https://www.ncbi.nlm.nih.gov/sra/SRX13234371[accn]
 - WT - VP10 -rep2: https://www.ncbi.nlm.nih.gov/sra/SRX13234243[accn]
+- S2 stock (Parental?): https://www.ncbi.nlm.nih.gov/sra/SRX13234390[accn]
 
 What is the reference here? EB reference ? or our consensus sequence?
 
