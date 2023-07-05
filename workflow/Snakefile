@@ -27,8 +27,49 @@ rule all:
         config['output_dir']+f"/snpgenie_population_summary.csv",
         config['output_dir']+f"/snpgenie_product_results.csv",
         config['output_dir']+f"/snpgenie_site_results.csv",
+        config['output_dir']+f"/deletion_analysis.csv",
     default_target: True
 
+
+rule collect_deletion_analysis:
+    input:
+        fnames_rdrp=expand("{dataset}/alignments/deletion_analysis_rdrp.csv", dataset=vpipe.datasets),
+        fnames_utr=expand("{dataset}/alignments/deletion_analysis_utr.csv", dataset=vpipe.datasets),
+    output:
+        fname=config['output_dir']+f"/deletion_analysis.csv",
+    resources:
+        mem_mb=6024,
+        time_min=840,
+    conda:
+        "envs/deletion_analysis.yaml"
+    script:
+        "./scripts/collect_deletion_analysis.py"
+
+rule deletion_analysis_rdrp:
+    input:
+        fname_bams="{dataset}/alignments/REF_aln.bam",
+    output:
+        fname_out="{dataset}/alignments/deletion_analysis_rdrp.csv",
+    resources:
+        mem_mb=30024,
+        time_min=840,
+    conda:
+        "envs/deletion_analysis.yaml"
+    script:
+        "./scripts/deletion_analysis_rdrp.py"
+
+rule deletion_analysis_utr:
+    input:
+        fname_bams="{dataset}/alignments/REF_aln.bam",
+    output:
+        fname_out="{dataset}/alignments/deletion_analysis_utr.csv",
+    resources:
+        mem_mb=30024,
+        time_min=840,
+    conda:
+        "envs/deletion_analysis.yaml"
+    script:
+        "./scripts/deletion_analysis.py"
 
 rule coverage_diagnostics:
     input:
