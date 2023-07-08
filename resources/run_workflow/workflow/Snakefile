@@ -5,6 +5,16 @@ def load_config(path):
     config = load_configfile(path)
     return config
 
+
+module parental_stock_consensus:
+    snakefile:
+        "../../../workflow/Snakefile"
+    config:
+        load_config("config_parental_stock_consensus/config.yaml")
+
+use rule * from parental_stock_consensus as parental_stock_consensus_*
+
+
 """
 module parental_stock_ref_Cha:
     snakefile:
@@ -65,10 +75,11 @@ use rule * from dicer_KO as dicer_KO_*
 # define required output files
 rule all:
     input:
+        rules.parental_stock_consensus_all.input,
         #rules.parental_stock_ref_Cha_all.input,
         #rules.parental_stock_ref_EBref_all.input,
         #rules.wild_type_all.input,
         #rules.dicer_over_expressing_all.input,
-        rules.mongelli2022_all.input,
+        #rules.mongelli2022_all.input,
         #rules.dicer_KO_all.input,
     default_target: True

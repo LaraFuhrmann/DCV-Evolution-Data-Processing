@@ -1,0 +1,33 @@
+vpipe:
+  general:
+      aligner: "bwa"
+      snv_caller: "shorah"
+
+  input:
+      reference: ../references/parental_stock.consensus.fasta
+      datadir: ../../../../samples/parental_stock
+      read_length: 100
+      samples_file: samples_parental_stock.tsv
+      paired: true
+
+  consensus_bcftools:
+      max_coverage: 150000
+
+  snv:
+    consensus: false
+    disk_mb: 1250
+    mem_mb: 35000
+    time_min: 6000
+    threads: 64
+
+  output:
+      datadir: results/parental_stock_consensus/results_vpipe
+
+      snv: true
+      local: true
+      global: false
+      visualization: true
+      diversity: false
+      QA: false
+
+output_dir: results/parental_stock_consensus
