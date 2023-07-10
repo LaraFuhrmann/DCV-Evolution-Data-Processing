@@ -9,10 +9,10 @@ from cigar import Cigar
 start_region = 5765-24
 end_region = 5774-24
 print('start ', start_region, ' end ', end_region)
-deletion_postion = list(range(276-24,285-24))
+deletion_postion = list(range(5765-24,5774-24))
 
 def f_filter_region(row):
-    if (float(row['Start'])<276-24) & (float(row['End'])>285-24):
+    if (float(row['Start'])<5765-24) & (float(row['End'])>5774-24):
         return True
     else:
         return False
@@ -79,7 +79,7 @@ def get_df_bam(fname_bam):
     df_bam["genotype"] = fname_bam.split("/alignment")[0].split("/")[-4]
     df_bam["replicate"] = fname_bam.split("/alignment")[0].split("/")[-2]
     df_bam["passage"] = fname_bam.split("/alignment")[0].split("/")[-1]
-    df_bam["deletion_position"] = 5765
+    df_bam["deletion_position"] = "5765"
 
     return df_bam
 
