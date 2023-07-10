@@ -28,7 +28,31 @@ rule all:
         config['output_dir']+f"/snpgenie_product_results.csv",
         config['output_dir']+f"/snpgenie_site_results.csv",
         config['output_dir']+f"/deletion_analysis.csv",
+        config['output_dir']+f"/seq_quality_scores.csv",
     default_target: True
+
+
+rule collect_seq_quality_scores:
+    input:
+        fnames=expand("{dataset}/alignments/seq_quality_scores.tsv", dataset=vpipe.datasets),
+        fnames_snv=expand("{dataset}/variants/SNVs/snvs.csv", dataset=vpipe.datasets),
+    output:
+        fname_out=config['output_dir']+f"/seq_quality_scores.csv",
+    conda:
+        "envs/deletion_analysis.yaml"
+    script:
+        "./scripts/collect_seq_quality_scores.py"
+
+
+rule seq_quality_scores:
+    input:
+        fname_bam="{dataset}/alignments/REF_aln.bam",
+        fname_reference=config['vpipe']['input']['reference'],
+    output:
+        fname_out="{dataset}/alignments/seq_quality_scores.tsv",
+    conda:
+        "envs/quality_scores.yaml"
+    shell: "pysamstats -t baseq_ext --fasta {input.fname_reference} --output {output.fname_out} {input.fname_bam}"
 
 
 rule collect_deletion_analysis:
