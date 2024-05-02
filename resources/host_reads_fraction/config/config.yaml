@@ -1,0 +1,21 @@
+vpipe:
+  general:
+      aligner: "bwa"
+
+  input:
+      reference: resources/references/reference.fasta
+      datadir: resources/samples/
+      samples_file: samples.tsv
+      paired: false
+
+  output:
+      datadir: results/
+
+      snv: false
+      local: false
+      global: false
+      visualization: false
+      diversity: false
+      QA: false
+
+output_dir: results/

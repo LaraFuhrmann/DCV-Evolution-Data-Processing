@@ -1,0 +1,25 @@
+from snakemake.utils import Paramspace
+import yaml
+
+def load_config(path):
+    with open(path, 'r') as stream:
+        config = yaml.safe_load(stream)
+    return config
+
+import pandas as pd
+
+config = load_config("config/config.yaml")
+
+# setup paramspace
+df_samples = pd.read_csv(config["vpipe"]['input']['samples_file'], comment="#", sep="\t")
+
+module vpipe:
+    snakefile: github("cbg-ethz/V-pipe", path="workflow/Snakefile", tag="v3.0.0.pre0")
+    config: config["vpipe"]
+
+use rule * from vpipe as vpipe_*
+
+rule all:
+    input:
+        rules.vpipe_all.input,
+    default_target: True
