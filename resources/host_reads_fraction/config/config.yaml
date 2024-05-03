@@ -6,7 +6,10 @@ vpipe:
       reference: resources/references/reference.fasta
       datadir: resources/samples/
       samples_file: samples.tsv
-      paired: false
+      paired: true
+      fastq_suffix: _1
+
+
 
   output:
       datadir: results/
